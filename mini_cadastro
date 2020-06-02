@@ -1,0 +1,134 @@
+section .data:
+
+    msg1 db "Digite o seu nome: ", 0xa
+    len1 equ $ - msg1
+
+    msg2 db "Digite o seu sobrenome: ", 0xa
+    len2 equ $ - msg2
+
+    msg3 db "Digite sua data de nascimento: ", 0xa
+    len3 equ $ - msg3
+
+    msg4 db "Digite o seu CPF: ", 0xa
+    len4 equ $ - msg4
+
+    msg5 db "Digite o seu endereço: ", 0xa
+    len5 equ $ - msg5
+
+    msg6 db "DADOS DO CADASTRO", 0xa
+    len6 equ $ - msg6
+    
+    espaco db " ", 0xa
+
+    section .bss
+
+        nome        resb 7
+        sobrenome   resb 9
+        nascimento  resb 8
+        cpf         resb 11
+        endereco    resb 12
+
+section .text:
+
+    global _start
+
+_start:
+
+    ;Digite o seu nome:
+    mov ecx, msg1
+    mov edx, len1    
+    call EXIBIR
+
+    ;Bloco que pega o conteúdo do teclado.
+    mov ecx, nome
+    mov edx, 7
+    call ENTRADA
+
+    ;Digite o seu sobrenome:
+    mov ecx, msg2
+    mov edx, len2    
+    call EXIBIR
+
+    ;Bloco que pega o conteúdo do teclado.
+    mov ecx, sobrenome
+    mov edx, 9
+    call ENTRADA
+
+    ;Digite sua data de nascimento:
+    mov ecx, msg3
+    mov edx, len3    
+    call EXIBIR
+
+    ;Bloco que pega o conteúdo do teclado.
+    mov ecx, nascimento
+    mov edx, 8
+    call ENTRADA
+
+    ;Digite o seu CPF:
+    mov ecx, msg4
+    mov edx, len4    
+    call EXIBIR
+
+    ;Bloco que pega o conteúdo do teclado.
+    mov ecx, cpf
+    mov edx, 11
+    call ENTRADA
+
+    ;Digite o seu endereço:
+    mov ecx, msg5
+    mov edx, len5    
+    call EXIBIR
+
+    ;Bloco que pega o conteúdo do teclado.
+    mov ecx, endereco
+    mov edx, 12
+    call ENTRADA
+    ;======================================
+
+    ;DADOS DO CADASTRO
+    mov ecx, msg6
+    mov edx, len6
+    call EXIBIR
+
+    mov ecx, nome
+    mov edx, 6
+    call EXIBIR
+
+    mov ecx, espaco
+    mov edx, 1
+    call EXIBIR
+
+    mov ecx, sobrenome
+    mov edx, 9
+    call EXIBIR
+
+    mov ecx, nascimento
+    mov edx, 8
+    call EXIBIR
+
+    mov ecx, cpf
+    mov edx, 11
+    call EXIBIR
+
+    mov ecx, endereco
+    mov edx, 12
+    call EXIBIR
+
+    call EXIT
+
+    EXIBIR:
+        mov eax, 4
+        mov ebx, 1
+        int 80h
+        ret
+    
+    ENTRADA:
+        mov eax, 3
+        mov ebx, 0
+        int 80h
+        ret
+    
+    EXIT:
+        mov eax, 1
+        mov ebx, 0 
+        int 0x80
